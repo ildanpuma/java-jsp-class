@@ -1,3 +1,5 @@
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.util.Enumeration"%>
 <%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
@@ -6,6 +8,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import = "dto.Book" %>
 <%@ page import = "dao.BookRepository" %>
+<%@ include file = "dbconnection.jsp" %>
 
 <% 
 	request.setCharacterEncoding("UTF-8");
@@ -42,9 +45,10 @@
 	else
 		stock=Long.valueOf(unitsInStock);
 	
-	BookRepository dao=BookRepository.getInstance();
+	/* BookRepository dao=BookRepository.getInstance(); */
 	
-	Book newBook = new Book();
+	
+	/* Book newBook = new Book();
 	
 	newBook.setBookId(bookId);
 	newBook.setName(name);
@@ -56,9 +60,31 @@
 	newBook.setCategory(category);
 	newBook.setUnitsInStock(stock);
 	newBook.setCondition(condition);
-	newBook.setFilename(filename);
+	newBook.setFilename(filename); */
 	
-	dao.addBook(newBook);
+	/* dao.addBook(newBook); */
+	
+	PreparedStatement ps = null;
+	ResultSet rs = null;
+	
+	String sql = "insert into book values(?,?,?,?,?,?,?,?,?,?,?)";
+	ps = conn.prepareStatement(sql);
+	ps.setString(1, bookId);
+	ps.setString(2, name);
+	ps.setInt(3, price);
+	ps.setString(4, author);
+	ps.setString(5, description);
+	ps.setString(6, publisher);
+	ps.setString(7, category);
+	ps.setLong(8, stock);
+	ps.setString(9, releaseDate);
+	ps.setString(10, condition);
+	ps.setString(11, filename);
+	
+	ps.executeUpdate();
+	
+	if(ps!=null)ps.close();
+	if(conn!=null)conn.close();
 	
 	response.sendRedirect("book_list.jsp");
 	

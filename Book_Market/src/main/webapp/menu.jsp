@@ -27,9 +27,6 @@
 		  <li class="nav-item">
 		    <a class="nav-link" href="./editBook.jsp?edit=update">도서수정</a>
 		  </li>
-		  <li class="nav-item">
-		    <a class="nav-link" href="./editBook.jsp?edit=delete">도서삭제</a>
-		  </li>
 		</ul>
 		</div>
 	</div>

@@ -8,7 +8,7 @@
 	try {
 		String url = "jdbc:mysql://localhost:3306/bookmarketdb";
 		String user = "root";
-		String password = "admin";
+		String password = "12345";
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, password);

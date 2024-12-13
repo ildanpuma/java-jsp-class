@@ -17,6 +17,8 @@ public class Book {
 	private String releaseDate;
 	private String condition;
 	private String filename;
+	private int quantity; //장바구니에 담은 갯수
+		
 	
 	public Book() {
 		super();
@@ -114,6 +116,14 @@ public class Book {
 		this.filename = filename;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+	
 	public Book(String bookId, String name, Integer unitPrice) {
         this.bookId=bookId;
         this.name=name;

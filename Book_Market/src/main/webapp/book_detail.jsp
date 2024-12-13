@@ -16,6 +16,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+<script type="text/javascript">
+	function addTocart() {
+		if(confirm("도설르 장바구니에 추가하시겠습니까?")){
+			documet.addform.submit();
+		}else {
+			documet.addform.reset();
+		}
+	}
+</script>
 <body>
 	<!-- 메뉴영역 -->
 	<div class="container py-4">
@@ -63,8 +72,11 @@
 				<p> 재고수 : <%= rs.getLong("b_unitsInStock") %>
 				<p> <%= rs.getString("b_description").substring(0, 60)%>...</p>
 				<p> <%= NumberFormat.getInstance().format(rs.getInt("b_unitPrice")) %>원</p>
-				<p><a href="#" class="btn btn-info">도서주문 &raquo;</a>
-				<p><a href="./book_list.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				<form name = "addform" action="./addcart.jsp?id=<%=rs.getString("b_id")%>" method="post">
+					<a href="./addcart.jsp" class="btn btn-info" onclick="addTocart()">도서주문 &raquo;</a>
+					<a href="./cart.jsp" class="btn btn-warning">장바구니 &raquo;</a>
+					<a href="./book_list.jsp" class="btn btn-secondary">도서목록 &raquo;</a>
+				</form>
 			</div>
 	</div>
 	<%}
